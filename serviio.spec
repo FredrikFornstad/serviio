@@ -1,0 +1,70 @@
+Name: 		serviio
+Version:	1.4
+Release:	1
+License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
+Summary:	A free media server
+URL:		http://www.serviio.org/
+Group:		Productivity/Multimedia/Other
+Source:		http://download.serviio.org/releases/%{name}-%{version}-linux.tar.gz
+Source1:	serviio
+Patch1:     	serviio.sh.patch
+BuildRequires:	tar gzip
+Requires:   	java >= 1.6.0
+Requires:	ffmpeg >= 0.11
+Requires:	dcraw >= 8.96
+BuildRoot:  	%{_tmppath}/%{name}-%{version}-build
+BuildArch:	noarch
+
+%description
+It allows you to stream your media files (music, video 
+or images) to renderer devices (e.g. a TV set, Bluray player, games console
+or mobile phone) on your connected home network.
+
+%prep
+%setup -q
+%patch1 -p1
+%__cp %{SOURCE1} .
+
+%build
+
+%install
+chmod 775 bin/*.sh
+install -d $RPM_BUILD_ROOT/usr/share/serviio/bin
+%__cp bin/*.sh $RPM_BUILD_ROOT/usr/share/serviio/bin 
+chmod -x library/derby.properties
+for dir in config lib library plugins; do 
+	install -d $RPM_BUILD_ROOT/usr/share/serviio/$dir
+	%__cp $dir/* $RPM_BUILD_ROOT/usr/share/serviio/$dir
+done
+install -d $RPM_BUILD_ROOT/usr/share/serviio/log
+install -D -m 755 %{S:1} $RPM_BUILD_ROOT/etc/init.d/serviio
+
+
+%pre
+getent group serviio >/dev/null || groupadd -r serviio
+getent passwd serviio >/dev/null || useradd -r -g serviio -d /usr/share/serviio -s /sbin/nologin -c "Serviio Deamon" serviio
+
+
+%post
+chkconfig --add serviio
+# chkconfig serviio on
+# service serviio start
+
+%preun
+service serviio stop
+chkconfig serviio off
+chkconfig --del serviio
+
+%files
+%defattr(-,%{name},%{name})
+%doc legal/commons-codec-licence.txt legal/commons-io-licence.txt legal/dcraw-licence.txt legal/Derby-licence.txt legal/FFmpeg-licence.txt legal/FreeMarker-licence.txt legal/Gson-licence.txt legal/HttpCore-licence.txt legal/Jcs-licence.txt legal/JDOM-licence.txt legal/jNAT-PMPlib-licence.txt legal/LameMP3Encoder-licence.txt legal/librtmp-licence.txt legal/LICENSE.xerox legal/Log4J-licence.txt legal/Restlet-licence.txt legal/Rome-licence.txt legal/Sanselan-licence.txt legal/sbbi-upnplib-licence.txt legal/slf4j-licence.txt legal/StreamFlyer-licence.txt legal/winp-licence.txt legal/XStream-licence.txt LICENCE.txt NOTICE.txt README.txt RELEASE_NOTES.txt
+%attr(-,%{name},%{name}) /usr/share/serviio
+%attr(755,root,root) /etc/init.d/serviio
+
+%changelog
+* Fri Jan 10 2014 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.4
+- New version of Serviio
+
+* Sun Nov 10 2013 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.3.1
+- First build for ClearOS 6
+

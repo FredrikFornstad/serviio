@@ -1,0 +1,105 @@
+#! /bin/sh
+#
+# chkconfig 35 85 15
+# description: Start the Serviio Media Server in headless mode
+### BEGIN INIT INFO
+# Provides: serviio
+# Required-Start: $network
+# Required-Stop: $network
+# Default-Start: 3 5
+# Default-Stop: 0 1 2 6
+# Description: Start the Serviio Media Server in headless mode
+### END INIT INFO
+
+SERVIIO_HOME="/usr/share/serviio"
+SERVIIO_DAEMON="serviio.sh"
+SERVIIO_BIN="$SERVIIO_HOME/bin/$SERVIIO_DAEMON"
+SERVIIO_USER="serviio"
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+RETVAL=0
+
+check() {
+        # Check that we're a privileged user
+        [ $(id -u) = 0 ] || exit 4
+
+        # Check if SERVIIO_HOME exists
+        test -d "$SERVIIO_HOME" || exit 5
+
+        # Check if SERVIIO_BIN is executable
+        test -x "$SERVIIO_BIN" || exit 5
+}
+
+start() {
+        check
+        echo -n "Starting Serviio Media Server daemon: "
+	/bin/su -s /bin/bash --session-command="$SERVIIO_BIN -headless" $SERVIIO_USER &
+        RETVAL=$?
+        if [ $RETVAL -eq 0 ]; then
+            touch /var/lock/subsys/serviio.sh
+            echo_success
+        else
+            echo_failure
+        fi
+        echo
+        return $RETVAL
+}
+
+stop() {
+    check
+    echo -n "Shutting down Serviio Media Server daemon: "
+    # Retrieve JAVA Serviio process ID
+    PIDDAEMON=`pgrep $SERVIIO_DAEMON`
+    [ -z "$PIDDAEMON" ] || PIDJAVA=`ps -o pid= --ppid $PIDDAEMON`
+    # Kill the daemon
+    killproc "$SERVIIO_BIN"
+    RETVAL=$?
+    [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/serviio.sh
+    echo
+    # Kill the JAVA Serviio process if exists
+    [ -z "$PIDJAVA" ] || kill -9 $PIDJAVA
+    return $RETVAL
+}
+
+restart() {
+        stop
+        start
+}
+
+
+case "$1" in
+start)
+        if [ ! -f /var/lock/subsys/serviio.sh ]; then
+            start
+	else
+	echo -n "/var/lock/subsys/serviio.sh exist.Serviio already running?"
+	echo_failure
+	echo
+        fi
+        ;;
+stop)
+        stop
+        ;;
+force-reload)
+        restart
+        ;;
+restart)
+        restart
+        ;;
+condrestart)
+        if [ -f /var/lock/subsys/serviio.sh ]; then
+            restart
+        fi
+        ;;
+status)
+        status serviio.sh
+        ;;
+*)
+        echo $"Usage: $0 {start|stop|status|restart|condrestart|force-reload}"
+        RETVAL=2
+esac
+
+exit $RETVAL
+
