@@ -1,5 +1,5 @@
 Name: 		serviio
-Version:	1.4
+Version:	1.4.1
 Release:	1
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
@@ -51,9 +51,16 @@ chkconfig --add serviio
 # service serviio start
 
 %preun
-service serviio stop
-chkconfig serviio off
-chkconfig --del serviio
+if [ $1 -eq 0 ] ; then  # If this is an unistall then stop and delete the Serviio service
+	service serviio stop >/dev/null 2>&1
+	chkconfig serviio off
+	chkconfig --del serviio
+fi
+
+%postun
+if [ "$1" -ge "1" ] ; then  # If this is an upgrade then restart Serviio
+	service serviio condrestart >/dev/null 2>&1 || :
+fi
 
 %files
 %defattr(-,%{name},%{name})
@@ -62,6 +69,10 @@ chkconfig --del serviio
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+* Sat Mar 15 2014 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.4.1
+- New release of upstream Serviio
+- Change so that Serviio running state is preserved at future upgrades
+
 * Fri Jan 10 2014 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.4
 - New version of Serviio
 
