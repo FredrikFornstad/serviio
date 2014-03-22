@@ -1,5 +1,5 @@
 Name: 		serviio
-Version:	1.4.1.1
+Version:	1.4.1.2
 Release:	1
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
@@ -69,6 +69,9 @@ fi
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+* Sat Mar 22 2014 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.4.1.2
+- New upstream release
+
 * Wed Mar 19 2014 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.4.1.1
 - New upstream release
 
