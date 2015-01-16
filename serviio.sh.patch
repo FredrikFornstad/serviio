@@ -1,11 +1,24 @@
---- org/bin/serviio.sh	2014-03-21 22:43:59.000000000 +0100
-+++ mod/bin/serviio.sh	2014-03-22 10:06:42.593385730 +0100
+--- org/bin/serviio.sh	2015-01-13 01:40:19.000000000 +0100
++++ mod/bin/serviio.sh	2015-01-16 07:47:16.682704645 +0100
 @@ -54,7 +54,7 @@
  SERVIIO_CLASS_PATH="$SERVIIO_HOME/lib/*:$SERVIIO_HOME/config"
  
  # Setup Serviio specific properties
--JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dderby.system.home=$SERVIIO_HOME/library -Dserviio.home=$SERVIIO_HOME"
-+JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dderby.system.home=$SERVIIO_HOME/library -Dserviio.home=$SERVIIO_HOME -Dffmpeg.location=/usr/bin/ffmpeg"
+-JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dorg.restlet.engine.loggerFacadeClass=org.restlet.ext.slf4j.Slf4jLoggerFacade -Dderby.system.home=$SERVIIO_HOME/library -Dserviio.home=$SERVIIO_HOME -Dffmpeg.location=ffmpeg -Ddcraw.location=dcraw"
++JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dorg.restlet.engine.loggerFacadeClass=org.restlet.ext.slf4j.Slf4jLoggerFacade -Dderby.system.home=$SERVIIO_HOME/library -Dserviio.home=$SERVIIO_HOME -Dffmpeg.location=/usr/bin/ffmpeg -Ddcraw.location=dcraw"
  
  # For Cygwin, switch paths to Windows format before running java
  if $cygwin; then
+@@ -63,7 +63,11 @@
+     SERVIIO_CLASS_PATH=`cygpath --path --windows "$SERVIIO_CLASS_PATH"`
+ fi
+ 
++# Serviio 1.5 requires Java 8, force settings for ClearOS
++JAVA_HOME="/usr/lib/jvm/jre-1.8.0-openjdk"
++JAVA="$JAVA_HOME/bin/java"
++
+ # Execute the JVM in the foreground
+-exec "$JAVA" -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"         
++"$JAVA" -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"         
+ 
+ 

@@ -1,6 +1,6 @@
 Name: 		serviio
-Version:	1.4.1.2
-Release:	1
+Version:	1.5
+Release:	3
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
 URL:		http://www.serviio.org/
@@ -8,8 +8,9 @@ Group:		Productivity/Multimedia/Other
 Source:		http://download.serviio.org/releases/%{name}-%{version}-linux.tar.gz
 Source1:	serviio
 Patch1:     	serviio.sh.patch
+Patch2:		profiles.xml.patch
 BuildRequires:	tar gzip
-Requires:   	java >= 1.6.0
+Requires:   	java-1.8.0-openjdk
 Requires:	ffmpeg >= 0.11
 Requires:	dcraw >= 8.96
 BuildRoot:  	%{_tmppath}/%{name}-%{version}-build
@@ -23,6 +24,7 @@ or mobile phone) on your connected home network.
 %prep
 %setup -q
 %patch1 -p1
+%patch2 -p1
 %__cp %{SOURCE1} .
 
 %build
@@ -69,6 +71,10 @@ fi
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+* Fri Jan 16 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.5-3
+- New upstream release
+- Java 8 is now required, DTS-patch introduced as Serviio 1.5 is designed for FFmpeg 2.3 or higher
+
 * Sat Mar 22 2014 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.4.1.2
 - New upstream release
 
