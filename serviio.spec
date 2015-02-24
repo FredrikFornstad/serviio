@@ -1,6 +1,6 @@
 Name: 		serviio
-Version:	1.5
-Release:	3
+Version:	1.5.1
+Release:	1
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
 URL:		http://www.serviio.org/
@@ -71,6 +71,9 @@ fi
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+* Tue Feb 24 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.5.1-1
+- New upstream release
+
 * Fri Jan 16 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.5-3
 - New upstream release
 - Java 8 is now required, DTS-patch introduced as Serviio 1.5 is designed for FFmpeg 2.3 or higher
