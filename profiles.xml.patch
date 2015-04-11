@@ -1,12 +1,11 @@
---- org/config/profiles.xml	2015-02-24 19:17:30.716960449 +0100
-+++ mod/config/profiles.xml	2015-02-24 19:23:33.845959691 +0100
-@@ -1161,6 +1161,9 @@
+--- org/config/profiles.xml	2015-04-08 21:35:34.000000000 +0200
++++ mod/config/profiles.xml	2015-04-11 13:38:37.568943618 +0200
+@@ -1161,6 +1161,8 @@
  				mkv files stutter irretrievably after seeks, which seems to be a DLNA firmware issue with the player. If you have a European or Canadian player (not US), you stream over a wired connection and want mkv 
  				subtitles, dts support, and multiple audio tracks - but don't care that you can't seek - remove all matroska transcoding matches below to have the player decode mkv natively. -->
  			<Video targetContainer="mpegts" targetACodec="ac3" aBitrate="320" forceInheritance="true">
 +<!-- FFmpeg before 2.3 cannot remux dts audio properly so it must be transcoded, but all other audio is left alone https://ffmpeg.org/trac/ffmpeg/ticket/1398 -->
-+				<Matches container="matroska" aCodec="dca" />
-+
++   <Matches container="matroska" aCodec="dca" />
  				<Matches container="matroska" aCodec="dts-hd" />   
  				<Matches container="matroska" aCodec="vorbis" />
  				<Matches container="matroska" aCodec="truehd" />

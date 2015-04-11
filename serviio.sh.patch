@@ -1,24 +1,11 @@
---- org/bin/serviio.sh	2015-02-22 21:11:26.000000000 +0100
-+++ mod/bin/serviio.sh	2015-02-24 19:53:37.197272209 +0100
-@@ -54,7 +54,7 @@
- SERVIIO_CLASS_PATH="$SERVIIO_HOME/lib/*:$SERVIIO_HOME/config"
- 
- # Setup Serviio specific properties
--JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dorg.restlet.engine.loggerFacadeClass=org.restlet.ext.slf4j.Slf4jLoggerFacade -Dderby.system.home=$SERVIIO_HOME/library -Dserviio.home=$SERVIIO_HOME -Dffmpeg.location=ffmpeg -Ddcraw.location=dcraw"
-+JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dorg.restlet.engine.loggerFacadeClass=org.restlet.ext.slf4j.Slf4jLoggerFacade -Dderby.system.home=$SERVIIO_HOME/library -Dserviio.home=$SERVIIO_HOME -Dffmpeg.location=/usr/bin/ffmpeg -Ddcraw.location=dcraw"
- 
- # For Cygwin, switch paths to Windows format before running java
- if $cygwin; then
-@@ -63,7 +63,11 @@
-     SERVIIO_CLASS_PATH=`cygpath --path --windows "$SERVIIO_CLASS_PATH"`
- fi
- 
-+# Serviio 1.5 requires Java 8, force settings for ClearOS
-+JAVA_HOME="/usr/lib/jvm/jre-1.8.0-openjdk"
-+JAVA="$JAVA_HOME/bin/java"
-+
- # Execute the JVM in the foreground
--exec "$JAVA" -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"         
-+"$JAVA" -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"         
- 
- 
+--- org/config/profiles.xml	2015-04-08 21:35:34.000000000 +0200
++++ mod/config/profiles.xml	2015-04-11 13:38:37.568943618 +0200
+@@ -1161,6 +1161,8 @@
+ 				mkv files stutter irretrievably after seeks, which seems to be a DLNA firmware issue with the player. If you have a European or Canadian player (not US), you stream over a wired connection and want mkv 
+ 				subtitles, dts support, and multiple audio tracks - but don't care that you can't seek - remove all matroska transcoding matches below to have the player decode mkv natively. -->
+ 			<Video targetContainer="mpegts" targetACodec="ac3" aBitrate="320" forceInheritance="true">
++<!-- FFmpeg before 2.3 cannot remux dts audio properly so it must be transcoded, but all other audio is left alone https://ffmpeg.org/trac/ffmpeg/ticket/1398 -->
++   <Matches container="matroska" aCodec="dca" />
+ 				<Matches container="matroska" aCodec="dts-hd" />   
+ 				<Matches container="matroska" aCodec="vorbis" />
+ 				<Matches container="matroska" aCodec="truehd" />
