@@ -1,6 +1,6 @@
 Name: 		serviio
 Version:	1.5.2
-Release:	1
+Release:	2
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
 URL:		http://www.serviio.org/
@@ -71,6 +71,9 @@ fi
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+*Sat May 23 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.5.2-2
+- Correction of wrong patch file for serviio.sh
+
 *Sat Apr 11 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.5.2-1
 - New upstream release
 
