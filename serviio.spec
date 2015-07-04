@@ -1,6 +1,6 @@
 Name: 		serviio
 Version:	1.5.2
-Release:	2
+Release:	3
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
 URL:		http://www.serviio.org/
@@ -11,7 +11,7 @@ Patch1:     	serviio.sh.patch
 Patch2:		profiles.xml.patch
 BuildRequires:	tar gzip
 Requires:   	java-1.8.0-openjdk
-Requires:	ffmpeg >= 0.11
+Requires:	ffmpeg >= 2.3
 Requires:	dcraw >= 8.96
 BuildRoot:  	%{_tmppath}/%{name}-%{version}-build
 BuildArch:	noarch
@@ -71,6 +71,10 @@ fi
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+*Sat Jul 4 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.5.2-3
+- Added transcoding parameters to profiles.xml.patch to enable all sorts of h265(HEVC) files to play correctly on Sony devices
+- Removed the DTS-patch since FFmpeg 2.3 or higher is now required
+
 *Sat May 23 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.5.2-2
 - Correction of wrong patch file for serviio.sh
 
