@@ -1,6 +1,6 @@
 Name: 		serviio
-Version:	1.5.2
-Release:	4%{?dist}
+Version:	1.6
+Release:	1%{?dist}
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
 URL:		http://www.serviio.org/
@@ -9,6 +9,7 @@ Source:		http://download.serviio.org/releases/%{name}-%{version}-linux.tar.gz
 Source1:	serviio
 Patch1:     	serviio.sh.patch
 Patch2:		profiles.xml.patch
+Patch3:		log4j.xml.patch
 BuildRequires:	tar gzip
 Requires:   	java-1.8.0-openjdk
 Requires:	ffmpeg >= 2.3
@@ -25,6 +26,7 @@ or mobile phone) on your connected home network.
 %setup -q
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 %__cp %{SOURCE1} .
 
 %build
@@ -41,7 +43,6 @@ done
 install -d $RPM_BUILD_ROOT/usr/share/serviio/log
 install -D -m 755 %{S:1} $RPM_BUILD_ROOT/etc/init.d/serviio
 
-
 %pre
 getent group serviio >/dev/null || groupadd -r serviio
 getent passwd serviio >/dev/null || useradd -r -g serviio -d /usr/share/serviio -s /sbin/nologin -c "Serviio Deamon" serviio
@@ -51,6 +52,8 @@ getent passwd serviio >/dev/null || useradd -r -g serviio -d /usr/share/serviio 
 chkconfig --add serviio
 # chkconfig serviio on
 # service serviio start
+touch /var/log/serviio.log
+chown serviio.webconfig /var/log/serviio.log
 
 %preun
 if [ $1 -eq 0 ] ; then  # If this is an unistall then stop and delete the Serviio service
@@ -71,6 +74,10 @@ fi
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+* Mon Jan 18 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.6-1
+- New upstream release
+- Move Serviio log file to /var/log so that ClearOS Log Viewer can find it
+
 * Mon Sep 7 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.5.2-4
 - Added dist-tag to releaseversion
 
