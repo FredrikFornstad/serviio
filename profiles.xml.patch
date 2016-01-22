@@ -31,7 +31,7 @@
  		<Transcoding>
 +			<!-- all h265 and h264 videos with high/main profile level > 4.1 will be transcoded to mpegts with mpeg2video and ac3 audio -->
 +                        <Video targetContainer="mpegts" targetVCodec="mpeg2video" maxVBitrate="17000" targetACodec="ac3" aBitrate="320" forceInheritance="tr$
-+                                <Matches container="*" vCodec="h265"/>
++                                <Matches container="*" vCodec="h265" />
 +                                <Matches container="*" vCodec="h264" profile="high_10" />
 +                                <Matches container="*" vCodec="h264" profile="high_444" />
 +                                <Matches container="*" vCodec="h264" profile="high_422" />
