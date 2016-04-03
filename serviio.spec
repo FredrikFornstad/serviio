@@ -1,6 +1,6 @@
 Name: 		serviio
-Version:	1.6
-Release:	2%{?dist}
+Version:	1.6.1
+Release:	1%{?dist}
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
 URL:		http://www.serviio.org/
@@ -74,6 +74,10 @@ fi
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+* Sun Apr 3 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.6.1-1
+- New upstream release
+- Minor additions to profiles.xml.patch for increased compatibility for Sony devices
+
 * Fri Jan 22 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.6-2
 - Corrected missing characters in profile.xml.patch
 
