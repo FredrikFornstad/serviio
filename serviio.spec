@@ -1,6 +1,6 @@
 Name: 		serviio
 Version:	1.7.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
 URL:		http://www.serviio.org/
@@ -74,6 +74,9 @@ fi
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+* Thu Oct 13 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.7.1-2
+- Corrected an error in serviio.sh.patch file introduced in 1.7.1-1
+
 * Thu Oct 13 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.7.1-1
 - New upstream release
 
