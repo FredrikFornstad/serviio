@@ -1,25 +1,24 @@
---- org/bin/serviio.sh	2016-09-12 21:49:22.000000000 +0200
-+++ mod/bin/serviio.sh	2016-09-16 21:09:59.999470545 +0200
+--- org/bin/serviio.sh	2016-10-13 12:29:02.000000000 +0200
++++ mod/bin/serviio.sh	2016-10-13 18:40:14.075480166 +0200
 @@ -54,7 +54,7 @@
  SERVIIO_CLASS_PATH="$SERVIIO_HOME/lib/*:$SERVIIO_HOME/config"
  
  # Setup Serviio specific properties
 -JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dorg.restlet.engine.loggerFacadeClass=org.restlet.ext.slf4j.Slf4jLoggerFacade -Dderby.system.home=$SERVIIO_HOME/library -Dserviio.home=$SERVIIO_HOME -Dffmpeg.location=ffmpeg -Ddcraw.location=dcraw"
-+JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dorg.restlet.engine.loggerFacadeClass=org.restlet.ext.slf4j.Slf4jLoggerFacade -Dderby.system.home=$SERVIIO_HOME/library -Dserviio.home=$SERVIIO_HOME -Dffmpeg.location=/usr/bin/ffmpeg -Ddcraw.location=dcraw"
++JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dorg.restlet.engine.loggerFacadeClass=org.restlet.ext.slf4j.Slf4jLoggerFacade -Dderby.system.home=$SERVIIO_HOME/library -Dserviio.home=$SERVIIO_HOME -Dffmpeg.location==/usr/bin/ffmpeg -Ddcraw.location=dcraw"
  
  # For Cygwin, switch paths to Windows format before running java
  if $cygwin; then
-@@ -63,7 +63,11 @@
+@@ -63,7 +63,9 @@
      SERVIIO_CLASS_PATH=`cygpath --path --windows "$SERVIIO_CLASS_PATH"`
  fi
  
 -# Execute the JVM in the foreground
 -exec "$JAVA" -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"         
-+# Serviio 1.7 requires Java 8, force settings for ClearOS
+-
++# Serviio 1.7.1 requires Java 8, force settings for ClearOS
 +JAVA_HOME="/usr/lib/jvm/jre-1.8.0-openjdk"
 +JAVA="$JAVA_HOME/bin/java"
-+
-+# Do not execute the JVM in the foreground on ClearOS
+ 
++# Do not execute the JVM in the foreground
 +"$JAVA" -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"         
- 
- 
