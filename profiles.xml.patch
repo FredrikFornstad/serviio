@@ -1,10 +1,10 @@
---- org/config/profiles.xml	2016-10-13 12:29:02.000000000 +0200
-+++ mod/config/profiles.xml	2016-10-13 18:46:01.921655630 +0200
+--- org/config/profiles.xml	2016-10-18 21:23:40.000000000 +0200
++++ mod/config/profiles.xml	2016-10-24 21:26:43.688245800 +0200
 @@ -1036,6 +1036,7 @@
  			<Matches container="*" vCodec="h264" profile="high_444" />
              <Matches container="*" vCodec="h264" profile="high" levelGreaterThan="4.1" />
              <Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.1" />
-+	    <Matches container="*" vCodec="vp9" />
++		<Matches container="*" vCodec="vp9" />
           </Video>
           <!-- Remux containers with h264 video + AC3 audio to MPEG-TS stream without transcoding -->
           <Video targetContainer="mpegts" forceInheritance="true">
@@ -38,7 +38,7 @@
  	            <Matches container="*" vCodec="h264" profile="high" levelGreaterThan="4.1" />
  	            <Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.1" />
  	            <Matches container="matroska" vCodec="vp8" />
-+		    <Matches container="*" vCodec="vp9" />
++			<Matches container="*" vCodec="vp9" />
  	        </Video>
  			<!-- 2010 model Sony BDP requests all formats except mpeg-ps and mpeg-ts in 32KB chunks which works badly over wifi, hence mkv files are remuxed to mpeg-ts by default in this profile. Natively played 
  				mkv files stutter irretrievably after seeks, which seems to be a DLNA firmware issue with the player. If you have a European or Canadian player (not US), you stream over a wired connection and want mkv 
