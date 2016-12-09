@@ -1,11 +1,11 @@
---- org/config/log4j.xml	2016-10-18 21:23:40.000000000 +0200
-+++ mod/config/log4j.xml	2016-10-24 21:21:22.730157100 +0200
+--- org/config/log4j.xml	2016-12-09 14:50:43.000000000 +0100
++++ mod/config/log4j.xml	2016-12-09 21:26:55.227092384 +0100
 @@ -12,7 +12,7 @@
  	 <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
  	 	<param name="Threshold" value="DEBUG"/>
  	 	<param name="Append" value="true" />
 -		<param name="File" value="${serviio.home}/log/serviio.log" />
-+		<param name="File" value="/var/log/serviio.log" />
++		<param name="File" value="/var/serviio.log" />
  		<param name="MaxFileSize" value="500KB" />
  		<param name="MaxBackupIndex" value="5" />	
  		<param name="Encoding" value="UTF-8" />	
