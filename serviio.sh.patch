@@ -1,5 +1,5 @@
---- org/bin/serviio.sh	2016-12-09 14:50:43.000000000 +0100
-+++ mod/bin/serviio.sh	2016-12-09 21:26:02.875550425 +0100
+--- org/bin/serviio.sh	2017-07-23 16:31:13.000000000 +0200
++++ mod/bin/serviio.sh	2017-08-06 22:05:29.220745859 +0200
 @@ -54,7 +54,7 @@
  SERVIIO_CLASS_PATH="$SERVIIO_HOME/lib/*:$SERVIIO_HOME/config"
  
@@ -15,7 +15,7 @@
  
 -# Execute the JVM in the foreground
 -exec "$JAVA" -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"         
-+# Serviio 1.8 requires Java 8, force settings for ClearOS
++# Serviio 1.9 requires Java 8, force settings for ClearOS
 +JAVA_HOME="/usr/lib/jvm/jre-1.8.0-openjdk"
 +JAVA="$JAVA_HOME/bin/java"
 +
