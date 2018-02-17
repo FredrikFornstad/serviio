@@ -1,42 +1,42 @@
---- org/config/profiles.xml	2017-07-23 16:31:13.000000000 +0200
-+++ mod/config/profiles.xml	2017-08-06 22:12:35.609880095 +0200
-@@ -1037,6 +1037,7 @@
+--- org/config/profiles.xml	2018-02-15 22:16:15.000000000 +0100
++++ mod/config/profiles.xml	2018-02-17 12:03:50.355162843 +0100
+@@ -1051,6 +1051,7 @@
  			<Matches container="*" vCodec="h264" profile="high_444" />
              <Matches container="*" vCodec="h264" profile="high" levelGreaterThan="4.1" />
              <Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.1" />
-+               <Matches container="*" vCodec="vp9" />
++		<Matches container="*" vCodec="vp9" />
           </Video>
           <!-- Remux containers with h264 video + AC3 audio to MPEG-TS stream without transcoding -->
           <Video targetContainer="mpegts" forceInheritance="true">
-@@ -1204,6 +1205,7 @@
+@@ -1218,6 +1219,7 @@
  	         <Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.2" />
  	         <Matches container="matroska" vCodec="vp8" />
  	         <Matches container="matroska" vCodec="vp9" />
-+               <Matches container="*" vCodec="vp9" />
++		<Matches container="*" vCodec="vp9" />
  	      </Video>
  	      <!-- Remux containers with h264 video + AC3 audio to MPEG-TS stream without transcoding -->
  	      <!-- Remux matroska/mpeg2video + AC3 audio to MPEG-TS stream without transcoding -->
-@@ -1303,6 +1305,7 @@
+@@ -1317,6 +1319,7 @@
  				<Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.2" />
  				<Matches container="matroska" vCodec="vp8" />
  				<Matches container="matroska" vCodec="vp9" />
-+               <Matches container="*" vCodec="vp9" />
++				<Matches container="*" vCodec="vp9" />
  			</Video>
  			<Video targetContainer="mpegts" forceInheritance="true">
  				<Matches container="flv" vCodec="h264" />
-@@ -1370,6 +1373,7 @@
+@@ -1384,6 +1387,7 @@
  				<Matches container="*" vCodec="h264" profile="high" levelGreaterThan="4.1" />
  				<Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.1" />
  				<Matches container="matroska" vCodec="vp8" />
-+               <Matches container="*" vCodec="vp9" />
++				<Matches container="*" vCodec=vp9" />
  			</Video>
  			<!-- Remux video and transcode unsupported audio codecs flac, truehd in mkv and lpcm in mpeg -->
  	        <Video targetContainer="mpegts" targetACodec="ac3" aBitrate="640">
-@@ -1479,6 +1483,7 @@
+@@ -1493,6 +1497,7 @@
  	            <Matches container="*" vCodec="h264" profile="high" levelGreaterThan="4.1" />
  	            <Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.1" />
  	            <Matches container="matroska" vCodec="vp8" />
-+               <Matches container="*" vCodec="vp9" />
++			<Matches container="*" vCodec=vp9" />
  	        </Video>
  			<!-- 2010 model Sony BDP requests all formats except mpeg-ps and mpeg-ts in 32KB chunks which works badly over wifi, hence mkv files are remuxed to mpeg-ts by default in this profile. Natively played 
  				mkv files stutter irretrievably after seeks, which seems to be a DLNA firmware issue with the player. If you have a European or Canadian player (not US), you stream over a wired connection and want mkv 

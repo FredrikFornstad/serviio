@@ -1,5 +1,5 @@
---- org/bin/serviio.sh	2017-07-23 16:31:13.000000000 +0200
-+++ mod/bin/serviio.sh	2017-08-06 22:05:29.220745859 +0200
+--- org/bin/serviio.sh	2018-02-15 22:16:15.000000000 +0100
++++ mod/bin/serviio.sh	2018-02-17 11:54:37.119678189 +0100
 @@ -54,7 +54,7 @@
  SERVIIO_CLASS_PATH="$SERVIIO_HOME/lib/*:$SERVIIO_HOME/config"
  
@@ -7,19 +7,19 @@
 -JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dorg.restlet.engine.loggerFacadeClass=org.restlet.ext.slf4j.Slf4jLoggerFacade -Dderby.system.home=$SERVIIO_HOME/library -Dserviio.home=$SERVIIO_HOME -Dffmpeg.location=ffmpeg -Ddcraw.location=dcraw"
 +JAVA_OPTS="-Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dorg.restlet.engine.loggerFacadeClass=org.restlet.ext.slf4j.Slf4jLoggerFacade -Dderby.system.home=$SERVIIO_HOME/library -Dserviio.home=$SERVIIO_HOME -Dffmpeg.location=/usr/bin/ffmpeg -Ddcraw.location=dcraw"
  
- # For Cygwin, switch paths to Windows format before running java
- if $cygwin; then
-@@ -63,7 +63,11 @@
+ # Check if we are using Java9
+ JAVA_VERSION=$("$JAVA" -version 2>&1 | awk -F '"' '/version/ {print $2}')
+@@ -70,7 +70,11 @@
      SERVIIO_CLASS_PATH=`cygpath --path --windows "$SERVIIO_CLASS_PATH"`
  fi
  
 -# Execute the JVM in the foreground
--exec "$JAVA" -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"         
-+# Serviio 1.9 requires Java 8, force settings for ClearOS
+-exec "$JAVA" $JAVA9_OPTS -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"
++# Serviio 1.9.1 requires Java 8, force settings for ClearOS
 +JAVA_HOME="/usr/lib/jvm/jre-1.8.0-openjdk"
 +JAVA="$JAVA_HOME/bin/java"
 +
 +# Do not execute the JVM in the foreground
-+"$JAVA" -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"         
++"$JAVA" $JAVA9_OPTS -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"
  
  
