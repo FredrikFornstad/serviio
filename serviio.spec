@@ -1,6 +1,6 @@
 Name: 		serviio
 Version:	1.9.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
 URL:		http://www.serviio.org/
@@ -74,6 +74,9 @@ fi
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+* Sun Feb 18 2018 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.9.1-2
+- Corrected 2 patch typos
+
 * Sat Feb 17 2018 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.9.1-1
 - New upstream release
 
