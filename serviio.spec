@@ -1,6 +1,6 @@
 Name: 		serviio
 Version:	1.9.1
-Release:	3%{?dist}
+Release:	4%{?dist}
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
 URL:		http://www.serviio.org/
@@ -74,6 +74,9 @@ fi
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+* Tue Feb 27 2018 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.9.1-4
+- Yet another rebuild, hoping that the ClearOS Koji system now works
+
 * Sun Feb 18 2018 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 1.9.1-3
 - Rebuild due to ClearOS Koji input/output error
 
