@@ -1,5 +1,5 @@
---- org/bin/serviio.sh	2018-02-15 22:16:15.000000000 +0100
-+++ mod/bin/serviio.sh	2018-02-17 11:54:37.119678189 +0100
+--- org/bin/serviio.sh	2018-05-08 21:52:23.000000000 +0200
++++ mod/bin/serviio.sh	2018-05-13 21:02:56.267990577 +0200
 @@ -54,7 +54,7 @@
  SERVIIO_CLASS_PATH="$SERVIIO_HOME/lib/*:$SERVIIO_HOME/config"
  
