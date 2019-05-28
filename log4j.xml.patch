@@ -1,5 +1,5 @@
---- org/config/log4j.xml	2018-12-10 22:21:19.000000000 +0100
-+++ mod/config/log4j.xml	2018-12-15 12:19:03.664878346 +0100
+--- org/config/log4j.xml	2019-05-15 21:54:13.000000000 +0200
++++ mod/config/log4j.xml	2019-05-28 19:51:34.388538687 +0200
 @@ -12,7 +12,7 @@
  	 <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
  	 	<param name="Threshold" value="DEBUG"/>

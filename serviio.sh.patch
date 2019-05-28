@@ -1,5 +1,5 @@
---- org/bin/serviio.sh	2018-12-10 22:21:19.000000000 +0100
-+++ mod/bin/serviio.sh	2018-12-15 12:18:05.498122794 +0100
+--- org/bin/serviio.sh	2019-05-15 21:54:15.000000000 +0200
++++ mod/bin/serviio.sh	2019-05-28 19:50:33.452886824 +0200
 @@ -54,7 +54,7 @@
  SERVIIO_CLASS_PATH="$SERVIIO_HOME/lib/*:$SERVIIO_HOME/config"
  
@@ -9,17 +9,17 @@
  
  # Check if we are using Java9
  JAVA_VERSION=$("$JAVA" -version 2>&1 | awk -F '"' '/version/ {print $2}')
-@@ -69,8 +69,11 @@
-     JAVA_HOME=`cygpath --path --windows "$JAVA_HOME"`
+@@ -70,7 +70,11 @@
      SERVIIO_CLASS_PATH=`cygpath --path --windows "$SERVIIO_CLASS_PATH"`
  fi
-+# Serviio 1.10.1 requires Java 8, force settings for ClearOS
-+JAVA_HOME="/usr/lib/jvm/jre-1.8.0-openjdk"
-+JAVA="$JAVA_HOME/bin/java"
  
 -# Execute the JVM in the foreground
 -exec "$JAVA" $JAVA9_OPTS -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"
-+# Do not execute the JVM in the foreground in ClearOS
++# Serviio 2.0 requires Java 8, force settings for ClearOS
++JAVA_HOME="/usr/lib/jvm/jre-1.8.0-openjdk"
++JAVA="$JAVA_HOME/bin/java"
++
++# Do not execute the JVM in the foreground
 +"$JAVA" $JAVA9_OPTS -Xmx512M -Xms20M -XX:+UseG1GC -XX:GCTimeRatio=1 -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 $JAVA_OPTS -classpath "$SERVIIO_CLASS_PATH" org.serviio.MediaServer "$@"
  
  
