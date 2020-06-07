@@ -1,14 +1,14 @@
---- org/config/profiles.xml	2019-05-15 21:54:14.000000000 +0200
-+++ mod/config/profiles.xml	2019-05-28 19:57:56.699427994 +0200
-@@ -1088,6 +1088,7 @@
+--- org/config/profiles.xml	2020-05-03 14:51:26.000000000 +0200
++++ mod/config/profiles.xml	2020-06-07 18:53:47.569014591 +0200
+@@ -1167,6 +1167,7 @@
  			<Matches container="*" vCodec="h264" profile="high_444" />
              <Matches container="*" vCodec="h264" profile="high" levelGreaterThan="4.1" />
              <Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.1" />
-+		<Matches container="*" vCodec="vp9" />
++	    <Matches container="*" vCodec="vp9" />
              <Matches container="*" widthGreaterThan="1920" />
           </Video>
           <!-- Remux containers with h264 video + AC3 audio to MPEG-TS stream without transcoding -->
-@@ -1255,7 +1256,7 @@
+@@ -1334,7 +1335,7 @@
  	          <Matches container="*" vCodec="h264" profile="high" levelGreaterThan="4.2" />
  	          <Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.2" />
  	          <Matches container="matroska" vCodec="vp8" />
@@ -17,7 +17,7 @@
  			  <Matches container="*" widthGreaterThan="1920" />
  	      </Video>
  	      <!-- Remux containers with h264 video + AC3 audio to MPEG-TS stream without transcoding -->
-@@ -1355,7 +1356,7 @@
+@@ -1434,7 +1435,7 @@
  				<Matches container="*" vCodec="h264" profile="high" levelGreaterThan="4.2" />
  				<Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.2" />
  				<Matches container="matroska" vCodec="vp8" />
@@ -26,7 +26,7 @@
  				<Matches container="*" widthGreaterThan="1920" />
  			</Video>
  			<Video targetContainer="mpegts" forceInheritance="true">
-@@ -1424,6 +1425,7 @@
+@@ -1503,6 +1504,7 @@
  				<Matches container="*" vCodec="h264" profile="high" levelGreaterThan="4.1" />
  				<Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.1" />
  				<Matches container="matroska" vCodec="vp8" />
@@ -34,11 +34,11 @@
  				<Matches container="*" widthGreaterThan="1920" />
  			</Video>
  			<!-- Remux video and transcode unsupported audio codecs flac, truehd in mkv and lpcm in mpeg -->
-@@ -1544,6 +1546,7 @@
+@@ -1624,6 +1626,7 @@
  	            <Matches container="*" vCodec="h264" profile="high" levelGreaterThan="4.1" />
  	            <Matches container="*" vCodec="h264" profile="main" levelGreaterThan="4.1" />
  	            <Matches container="matroska" vCodec="vp8" />
-+			 <Matches container="*" vCodec="vp9" />
++		    <Matches container="*" vCodec="vp9" />
  				<Matches container="*" widthGreaterThan="1920" />
  	        </Video>
  			<!-- 2010 model Sony BDP requests all formats except mpeg-ps and mpeg-ts in 32KB chunks which works badly over wifi, hence mkv files are remuxed to mpeg-ts by default in this profile. Natively played 
