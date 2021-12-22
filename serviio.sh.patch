@@ -1,5 +1,5 @@
---- org/bin/serviio.sh	2021-09-30 21:02:06.000000000 +0200
-+++ mod/bin/serviio.sh	2021-10-22 22:13:55.110536589 +0200
+--- org/bin/serviio.sh	2021-12-13 15:50:38.000000000 +0100
++++ mod/bin/serviio.sh	2021-12-22 19:39:25.273537654 +0100
 @@ -54,7 +54,7 @@
  SERVIIO_CLASS_PATH="$SERVIIO_HOME/lib/*:$SERVIIO_HOME/config"
  

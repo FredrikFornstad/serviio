@@ -1,5 +1,5 @@
 Name: 		serviio
-Version:	2.2
+Version:	2.2.1
 Release:	1%{?dist}
 License:	Free to use, copy & redistribute with limitations. See LICENCE.txt in Source file.
 Summary:	A free media server
@@ -9,7 +9,7 @@ Source:		http://download.serviio.org/releases/%{name}-%{version}-linux.tar.gz
 Source1:	serviio
 Patch1:     	serviio.sh.patch
 Patch2:		profiles.xml.patch
-Patch3:		log4j.xml.patch
+Patch3:		log4j2.xml.patch
 BuildRequires:	tar gzip
 Requires:   	java-1.8.0-openjdk
 Requires:	ffmpeg >= 2.3
@@ -74,6 +74,9 @@ fi
 %attr(755,root,root) /etc/init.d/serviio
 
 %changelog
+* Wed Dec 22 2021 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.2.1-1
+- New upstream release
+
 * Fri Oct 22 2021 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.2-1
 - New upstream release
 
